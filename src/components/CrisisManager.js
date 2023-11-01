@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSocialMentions } from '../services/apiService';
 import { updateCrisisData } from '../redux/actions';
+import SentimentAnalysis from './SentimentAnalysis';
+import SocialMention from './SocialMention';
+import LoadingScreen from './LoadingScreen';
 
 const CrisisManager = () => {
   const dispatch = useDispatch();
@@ -23,18 +26,16 @@ const CrisisManager = () => {
   }, [dispatch]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (
     <div id="crisisManager">
       <h2>Crisis Manager</h2>
+      <SentimentAnalysis data={crisisData} />
       <ul>
         {crisisData.map((mention, index) => (
-          <li key={index}>
-            <p>{mention.text}</p>
-            <p>{mention.sentiment}</p>
-          </li>
+          <SocialMention key={index} mention={mention} />
         ))}
       </ul>
     </div>
@@ -42,3 +43,29 @@ const CrisisManager = () => {
 };
 
 export default CrisisManager;
+
+// SocialMention.js
+const SocialMention = ({mention}) => {
+  return (
+    <li>
+      <p>{mention.text}</p>
+      <p>{mention.sentiment}</p>
+    </li>
+  );
+};
+
+export default SocialMention;
+
+// SentimentAnalysis.js
+const SentimentAnalysis = ({data}) => {
+  // Implement sentiment analysis algorithm 
+};
+
+export default SentimentAnalysis;
+
+// LoadingScreen.js
+const LoadingScreen = () => {
+  return <div>Loading...</div>;
+};
+
+export default LoadingScreen;

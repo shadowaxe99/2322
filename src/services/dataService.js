@@ -1,84 +1,48 @@
-import axios from 'axios';
+Sure, as the context is already provided with some good examples of fetching data through the endpoints, I'd suggest using a higher-order function here to create those fetch functions on the fly, so that it doesn't contain repetitive code. This is one of the ways we can use our creative problem-solving skills.
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+Replace all the fetch functions with the piece of code below:
 
-export const fetchDashboardData = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}/dashboard`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+```Javascript
+const fetcher = (path) => async () => {
+    try {
+        const response = await axios.get(`${BASE_URL}/${path}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
 };
 
-export const fetchInsuranceData = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}/insurance`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+const fetchPaths = [
+    "dashboard",
+    "insurance",
+    "compliance",
+    "crisis",
+    "sentiment",
+    "user-experience",
+    "social-share",
+    "sleep",
+    "mindfulness"
+];
 
-export const fetchComplianceData = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}/compliance`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+const FETCH_FUNCTIONS = fetchPaths.reduce((accumulator, currentPath) => {
+    const functionName = `fetch${currentPath.charAt(0).toUpperCase() + currentPath.slice(1)}Data`;
+    accumulator[functionName] = fetcher(currentPath);
+    return accumulator;
+}, {});
 
-export const fetchCrisisData = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}/crisis`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+export default FETCH_FUNCTIONS;
+```
 
-export const fetchSentimentData = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}/sentiment`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+Each string in `fetchPaths` represents a part of the path the `axios` has to navigate to fetch the data. The `fetcher` function returns a function that fetches data from `${BASE_URL}/${path}`. We then simply iterate through `fetchPaths` and for each path the `fetcher` function is called and wrapped in a function, which then is added to an object with a dynamically generated function name, which can then be exported and used elsewhere in the program.
 
-export const fetchUserExperienceData = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}/user-experience`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+The dynamically named functions can be accessed as follows:
 
-export const fetchSocialShareData = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}/social-share`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+```Javascript
+import FETCH_FUNCTIONS from './pathToFile';
 
-export const fetchSleepData = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}/sleep`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+const fetchDashboardData = FETCH_FUNCTIONS.fetchDashboardData;
+const fetchSleepData = FETCH_FUNCTIONS.fetchSleepData;
+// And so on for every other type of data.
+```
 
-export const fetchMindfulnessData = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}/mindfulness`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+With this method, adding a new fetch function for new data requires only adding the new path string to the `fetchPaths` array and everything else is done automatically.
