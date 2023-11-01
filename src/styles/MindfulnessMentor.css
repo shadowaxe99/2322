@@ -1,0 +1,48 @@
+.mindfulness-mentor-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f0f8ff;
+}
+
+.mindfulness-mentor-header {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.mindfulness-mentor-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.mindfulness-mentor-chart {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+.mindfulness-mentor-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.mindfulness-mentor-button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.mindfulness-mentor-button:hover {
+    background-color: #45a049;
+}

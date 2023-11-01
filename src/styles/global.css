@@ -1,0 +1,91 @@
+/* Global Styles */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+}
+
+a {
+    color: #0070f3;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    cursor: pointer;
+}
+
+input, button, textarea {
+    margin-top: 10px;
+}
+
+/* Dashboard Styles */
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Component Styles */
+
+.component {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    width: calc(50% - 10px);
+}
+
+.component-full {
+    width: 100%;
+}
+
+.component h2 {
+    margin-top: 0;
+}
+
+/* Form Styles */
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input, form button {
+    width: 100%;
+}
+
+/* Utility Classes */
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}

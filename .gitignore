@@ -1,0 +1,26 @@
+# .gitignore
+
+node_modules/
+.env
+.DS_Store
+dist/
+build/
+.nyc_output/
+coverage/
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+pids/
+logs/
+results/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+testem.log
+/public
+/.next
+/out
+/.vercel
