@@ -1,48 +1,54 @@
-.mindfulness-mentor-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #f0f8ff;
+Here's an example of how you might use JavaScript and React to code a simple and very basic mindfulness mentor application. Featuring a button to commence a meditation session, which once clicked, will trigger a countdown of 5 seconds. After the countdown, a display message will remind the user to maintain focus on their breath.
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+function MindfulnessMentorApp() {
+    const [sessionInProgress, setSessionInProgress] = useState(false);
+    const [countdown, setCountdown] = useState(5);
+
+    useEffect(() => {
+        let timer;
+        if (sessionInProgress && countdown > 0) {
+            timer = setTimeout(() => {
+                setCountdown(countdown - 1);
+            }, 1000);
+        }
+
+        return () => clearTimeout(timer);
+    }, [sessionInProgress, countdown]);
+
+    return (
+        <div className='mindfulness-mentor-container'>
+            <header className='mindfulness-mentor-header'>
+                Mindfulness Mentor App
+            </header>
+            <div className='mindfulness-mentor-content'>
+                {sessionInProgress ? (
+                    countdown > 0 ? (
+                        <p className='mindfulness-mentor-countdown'>
+                            Session starting in: {countdown}
+                        </p>
+                    ) : (
+                        <p className='mindfulness-mentor-session-message'>
+                            Focus on your breath. Stay present.
+                        </p>
+                    )
+                ) : (
+                    <button 
+                        className='mindfulness-mentor-button' 
+                        onClick={() => {setSessionInProgress(true);
+                        setCountdown(5);
+                    }}
+                    >
+                        Start Mindfulness Session
+                    </button>
+                )}
+            </div>
+        </div>
+    );
 }
 
-.mindfulness-mentor-header {
-    font-size: 2em;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.mindfulness-mentor-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.mindfulness-mentor-chart {
-    width: 100%;
-    height: 400px;
-    margin-bottom: 20px;
-}
-
-.mindfulness-mentor-controls {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.mindfulness-mentor-button {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.mindfulness-mentor-button:hover {
-    background-color: #45a049;
-}
+export default MindfulnessMentorApp;
+```
+This is a very basic code without any validation. Further improvements and more detailed functionality could be added depending on project requirements. Please note that this code will not run standalone, as it's a part of a React app and needs the right environment setup to run properly.
